@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Owain van Brakel <https://github.com/Owain94>
+ * Copyright (c) 2020 Syzygee <https://github.com/Syzygee>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -25,11 +25,12 @@
 
 object ProjectVersions {
     const val openosrsVersion = "3.3.8"
-    const val apiVersion = "0.0.1"
+    const val apiVersion = "1.0.0"
 }
 
 object Libraries {
     private object Versions {
+        const val apacheCommonsText = "1.8"
         const val guice = "4.2.2"
         const val javax = "1.3.2"
         const val lombok = "1.18.10"
@@ -37,6 +38,7 @@ object Libraries {
         const val slf4j = "1.7.30"
     }
 
+    const val apacheCommonsText = "org.apache.commons:commons-text:${Versions.apacheCommonsText}"
     const val guice = "com.google.inject:guice:${Versions.guice}:no_aop"
     const val javax = "javax.annotation:javax.annotation-api:${Versions.javax}"
     const val lombok = "org.projectlombok:lombok:${Versions.lombok}"

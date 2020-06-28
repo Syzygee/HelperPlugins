@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Owain van Brakel <https:github.com/Owain94>
+ * Copyright (c) 2020 Syzygee <https://github.com/Syzygee>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,17 +22,36 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+package com.lastclick;
 
-rootProject.name = "Last Click Plugins"
+import net.runelite.client.config.Config;
+import net.runelite.client.config.ConfigGroup;
+import net.runelite.client.config.ConfigItem;
 
-include(":lastclick")
+@ConfigGroup("lastclick")
 
-for (project in rootProject.children) {
-    project.apply {
-        projectDir = file(name)
-        buildFileName = "$name.gradle.kts"
+public interface LastClickConfig extends Config
+{
 
-        require(projectDir.isDirectory) { "Project '${project.path} must have a $projectDir directory" }
-        require(buildFile.isFile) { "Project '${project.path} must have a $buildFile build script" }
-    }
+	@ConfigItem(
+		keyName = "farming",
+		name = "Farming Helper",
+		description = "Use seeds on soil when available.",
+		position = 0
+	)
+	default boolean doFarming()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+		keyName = "composting",
+		name = "Compost Helper",
+		description = "Use best available compost on herbs and watermelon/snape grass allotments.",
+		position = 1
+	)
+	default boolean doComposting()
+	{
+		return true;
+	}
 }

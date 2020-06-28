@@ -25,39 +25,47 @@ import ProjectVersions.openosrsVersion
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.3.61"
-    kotlin("kapt") version "1.3.61"
-}
-
 version = "0.0.1"
 
-project.extra["PluginName"] = "Auto Logger" // This is the name that is used in the external plugin manager panel
-project.extra["PluginDescription"] = "Auto Logger for wildy adventures" // This is the description that is used in the external plugin manager panel
+project.extra["PluginName"] = "Last Click" // This is the name that is used in the external plugin manager panel
+project.extra["PluginDescription"] = "The ultimate click" // This is the description that is used in the external plugin manager panel
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib")
+    annotationProcessor(Libraries.lombok)
+    annotationProcessor(Libraries.pf4j)
+    annotationProcessor(Libraries.apacheCommonsText)
 
-    kapt(Libraries.pf4j)
+    annotationProcessor(group = "org.projectlombok", name = "lombok", version = "1.18.12")
+    annotationProcessor(group = "org.pf4j", name = "pf4j", version = "3.2.0")
+    implementation(group = "ch.qos.logback", name = "logback-classic", version = "1.2.3")
+    implementation(group = "com.google.code.gson", name = "gson", version = "2.8.6")
+    implementation(group = "com.google.guava", name = "guava", version = "28.2-jre")
+    implementation(group = "com.google.inject", name = "guice", version = "4.2.3", classifier = "no_aop")
+    implementation(group = "com.openosrs", name = "http-api", version = "3.3.8")
+    implementation(group = "com.openosrs", name = "injected-client", version = "3.3.8")
+    implementation(group = "com.openosrs", name = "runelite-api", version = "3.3.8")
+    implementation(group = "com.openosrs", name = "runelite-client", version = "3.3.8")
+    implementation(group = "com.openosrs.rs", name = "runescape-api", version = "3.3.8")
+    implementation(group = "com.openosrs.rs", name = "runescape-client", version = "3.3.8")
+    implementation(group = "com.squareup.okhttp3", name = "okhttp", version = "4.5.0")
+    implementation(group = "com.squareup.okhttp3", name = "okhttp", version = "4.5.0")
+    implementation(group = "io.reactivex.rxjava3", name = "rxjava", version = "3.0.2")
+    implementation(group = "net.sf.jopt-simple", name = "jopt-simple", version = "5.0.4")
+    implementation(group = "org.apache.commons", name = "commons-text", version = "1.8")
+    implementation(group = "org.pf4j", name = "pf4j", version = "3.2.0")
+    implementation(group = "org.projectlombok", name = "lombok", version = "1.18.12")
 
     compileOnly("com.openosrs:runelite-api:$openosrsVersion+")
     compileOnly("com.openosrs:runelite-client:$openosrsVersion+")
 
     compileOnly(Libraries.guice)
     compileOnly(Libraries.javax)
+    compileOnly(Libraries.lombok)
     compileOnly(Libraries.pf4j)
-    compileOnly(Libraries.slf4j)
+    compileOnly(Libraries.apacheCommonsText)
 }
 
 tasks {
-    compileKotlin {
-        kotlinOptions {
-            jvmTarget = "11"
-            freeCompilerArgs = listOf("-Xjvm-default=enable")
-        }
-        sourceCompatibility = "11"
-    }
-
     jar {
         manifest {
             attributes(mapOf(
